@@ -11,6 +11,7 @@ import ru.practicum.dto.ViewStatsDto;
 import ru.practicum.model.EndpointHitMapper;
 import ru.practicum.service.StatsService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +24,7 @@ public class StatsServerController {
 
     @PostMapping("/hit")
     public HttpStatus postHit(@RequestBody
-//                              @Valid
+                              @Valid
                               EndpointHitDto hitDto) {
         log.info("Добавление запроса: {}", hitDto);
         service.postHit(EndpointHitMapper.dtoToModel(hitDto));
