@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @UtilityClass
 public final class EndpointHitMapper {
-    public static EndpointHit dtoToModel(EndpointHitDto hitDto) {
+    public EndpointHit dtoToModel(EndpointHitDto hitDto) {
         return EndpointHit.builder()
                 .app(hitDto.getApp())
                 .uri(hitDto.getUri())

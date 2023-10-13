@@ -20,14 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class StatsServerController {
-    private final StatsService service;
+    private final StatsService statsService;
 
     @PostMapping("/hit")
     public HttpStatus postHit(@RequestBody
                               @Valid
                               EndpointHitDto hitDto) {
         log.info("Добавление запроса: {}", hitDto);
-        service.postHit(EndpointHitMapper.dtoToModel(hitDto));
+        statsService.postHit(EndpointHitMapper.dtoToModel(hitDto));
         return HttpStatus.CREATED;
     }
 
@@ -47,7 +47,7 @@ public class StatsServerController {
         log.info("Запрос статистики в промежутке \n start={} \n end={}", start, end);
         log.info("Уникальные пользователи={}", unique);
         log.info("Список ресурсов={}", uris);
-        List<ViewStatsDto> response = service.getStats(start, end, uris, unique);
+        List<ViewStatsDto> response = statsService.getStats(start, end, uris, unique);
         log.info("Отправлена статистика, количество элементов={}", response.size());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
