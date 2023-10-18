@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EndpointHitDto {
-    @NotBlank(message = "Клиент-сервис не указан")
+    @NotBlank(message = "App name must be not blank")
     private String app;
 
-    @NotBlank(message = "Не указан uri к, которому осуществлен запрос")
+    @NotBlank(message = "Uri must be not null")
     private String uri;
 
-    @NotBlank(message = "ip пользователя не указан")
+    @NotBlank(message = "Ip must be not null")
     private String ip;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

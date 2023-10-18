@@ -8,6 +8,7 @@ import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
@@ -21,8 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class StatsClient {
-    private static final String SERVER_URL = "http://localhost:9090";
+    private static final String SERVER_URL = System.getenv("STATS_SERVER_URL");
     private static final String POST_HIT_PREFIX = "/hit";
     private static final String GET_STATS_PREFIX = "/stats";
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
