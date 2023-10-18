@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -49,7 +50,7 @@ public class StatsServerController {
         log.info("Уникальные пользователи={}", unique);
         log.info("Список ресурсов={}", uris);
         if (Duration.between(start, end).toSeconds() <= 1) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
         }
         List<ViewStatsDto> response = statsService.getStats(start, end, uris, unique);
         log.info("Отправлена статистика, количество элементов={}", response.size());
