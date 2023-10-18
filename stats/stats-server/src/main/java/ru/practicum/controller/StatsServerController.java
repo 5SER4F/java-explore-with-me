@@ -25,8 +25,8 @@ public class StatsServerController {
 
     @PostMapping("/hit")
     public ResponseEntity<HttpStatus> postHit(@RequestBody
-                              @Valid
-                              EndpointHitDto hitDto) {
+                                              @Valid
+                                              EndpointHitDto hitDto) {
         log.info("Добавление запроса: {}", hitDto);
         statsService.postHit(EndpointHitMapper.dtoToModel(hitDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -48,7 +48,7 @@ public class StatsServerController {
         log.info("Запрос статистики в промежутке \n start={} \n end={}", start, end);
         log.info("Уникальные пользователи={}", unique);
         log.info("Список ресурсов={}", uris);
-        if(Duration.between(start, end).toSeconds() <= 1) {
+        if (Duration.between(start, end).toSeconds() <= 1) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
         List<ViewStatsDto> response = statsService.getStats(start, end, uris, unique);
