@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.1'
 services:
   stats-server:
     build: ./stats/stats-server
@@ -7,22 +7,23 @@ services:
       - "9090:9090"
     depends_on:
       - stats-db
+      - ewm-db
     environment:
-      - DB_HOST=stats_db
+      - DB_HOST=stats-db
       - DB_NAME=statsDB
       - DB_PORT=5432
       - STATS_SERVER_URL=http://stats-server:9090
 
   stats-db:
     image: postgres:14-alpine
-    container_name: stats_db
+    container_name: stats-db
     ports:
       - "6541:5432"
     environment:
       - POSTGRES_DB=statsDB
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - PGHOST=stats_db
+      - PGHOST=stats-db
 
   ewm-service:
     build: ./main-service
@@ -44,11 +45,8 @@ services:
     container_name: ewm-db
     ports:
       - "6542:5432"
-    depends_on:
-      - stats-server
     environment:
       - POSTGRES_DB=ewm-db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - PGHOST=ewm-db
-#      - /////////////

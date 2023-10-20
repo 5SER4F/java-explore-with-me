@@ -7,7 +7,7 @@ import ru.practicum.main.service.user.dto.mapper.UserMapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",  uses = UserMapper.class)
+@Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface FriendshipMapper {
     FriendshipDto toFriendshipDto(Friendship friendship);
 
