@@ -19,10 +19,10 @@ services:
     ports:
       - "6541:5432"
     environment:
-          - POSTGRES_DB=statsDB
-          - POSTGRES_USER=root
-          - POSTGRES_PASSWORD=root
-          - PGHOST=stats_db
+      - POSTGRES_DB=statsDB
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - PGHOST=stats_db
 
   ewm-service:
     build: ./main-service
@@ -44,8 +44,10 @@ services:
     container_name: ewm-db
     ports:
       - "6542:5432"
+    depends_on:
+      - stats-server
     environment:
-          - POSTGRES_DB=ewm-db
-          - POSTGRES_USER=root
-          - POSTGRES_PASSWORD=root
-          - PGHOST=ewm-db
+      - POSTGRES_DB=ewm-db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - PGHOST=ewm-db
