@@ -11,12 +11,12 @@ import javax.validation.constraints.PositiveOrZero;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ViewStatsDto {
-    @NotBlank(message = "Клиент-сервис не указан")
+    @NotBlank(message = "App name must be not blank")
     private String app;
 
-    @NotBlank(message = "Не указан uri к, которому осуществлен запрос")
+    @NotBlank(message = "Uri must be not null")
     private String uri;
 
-    @PositiveOrZero(message = "Количество обращение не может быть меньше нуля")
+    @PositiveOrZero(message = "Hits must be positive or zero")
     private Long hits;
 }
