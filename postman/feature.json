@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8eee7f19-58ed-43aa-bc59-bff8c3a661f7",
+		"_postman_id": "76c9d039-3589-4274-90f3-7bdb1bce644c",
 		"name": "Test Explore With Me - Feature",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27011369",
-		"_collection_link": "https://red-desert-75551.postman.co/workspace/New-Team-Workspace~da849502-ade3-4a2e-bb67-99b7b9637ba8/collection/27011369-8eee7f19-58ed-43aa-bc59-bff8c3a661f7?action=share&source=collection_link&creator=27011369"
+		"_exporter_id": "27011369"
 	},
 	"item": [
 		{
@@ -308,8 +307,8 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-									"   pm.expect(userId).equal(target.user.id, 'Идентификатор пользователя должен соответствовать идентификатору в запросе');\r",
-									"    pm.expect(friendId).equal(target.friend.id, 'Название категории должно соответствовать названию категории с указанным идентификатором');\r",
+									"    pm.expect(userId).equal(target.user.id.toString(), 'Идентификатор пользователя должен соответствовать идентификатору в запросе');\r",
+									"    pm.expect(friendId).equal(target.friend.id.toString(), 'Название категории должно соответствовать названию категории с указанным идентификатором');\r",
 									"});"
 								],
 								"type": "text/javascript"
