@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDateTime;
 
 public class AfterDeltaHoursFromNowValidator implements ConstraintValidator<AfterDeltaHoursFromNow, LocalDateTime> {
-    private int deltaHours;
+    private int deltaHours = 0;
 
     @Override
     public void initialize(AfterDeltaHoursFromNow constraintAnnotation) {

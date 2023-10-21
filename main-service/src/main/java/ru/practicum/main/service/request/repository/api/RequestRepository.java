@@ -1,5 +1,6 @@
 package ru.practicum.main.service.request.repository.api;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.practicum.main.service.request.model.ParticipationRequest;
@@ -17,4 +18,7 @@ public interface RequestRepository extends JpaRepository<ParticipationRequest, L
 
     Optional<List<ParticipationRequest>> findAllByEventIdAndIdIn(
             Long eventId, List<Long> ids);
+
+    Optional<List<ParticipationRequest>> findAllByRequesterIdAndSubscriptionPermit(
+            Long requesterId, boolean subscriptionPermit, Pageable pageable);
 }

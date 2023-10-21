@@ -28,9 +28,8 @@ public class Event implements Comparable<Event> {
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     private Category category;
-    @Builder.Default
     @Column(name = "confirmed_requests")
-    private int confirmedRequests = 0;
+    private int confirmedRequests;
     @Builder.Default
     @Column(name = "created_on")
     private LocalDateTime createdOn = now();
@@ -45,9 +44,8 @@ public class Event implements Comparable<Event> {
     @ManyToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     private Location location;
-    @Builder.Default
     @Column(name = "paid")
-    private boolean paid = false;
+    private boolean paid;
     @Column(name = "participant_limit")
     private int participantLimit;
     @Builder.Default
@@ -61,9 +59,8 @@ public class Event implements Comparable<Event> {
     private boolean requestModeration;
     @Column(name = "title")
     private String title;
-    @Builder.Default
     @Transient
-    private long views = 0;
+    private long views;
 
     @Override
     public int compareTo(Event e) {

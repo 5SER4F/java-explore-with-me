@@ -26,4 +26,6 @@ public class ParticipationRequest {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private RequestState status;
+    @Column(name = "subscription_permit")
+    private boolean subscriptionPermit;
 }

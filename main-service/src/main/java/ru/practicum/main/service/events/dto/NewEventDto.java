@@ -36,7 +36,7 @@ public class NewEventDto {
     @Builder.Default
     Boolean paid = false;
     @PositiveOrZero(message = "Field: participantLimit. Error: participantLimit must be zero or positive.")
-    int participantLimit;
+    private int participantLimit;
     @Builder.Default
     Boolean requestModeration = true;
     @Size(min = 3, max = 120, message = "Field: title. Error: length error.")

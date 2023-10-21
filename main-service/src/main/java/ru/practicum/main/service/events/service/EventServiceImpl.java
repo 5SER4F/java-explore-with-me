@@ -26,10 +26,7 @@ import ru.practicum.main.service.request.model.ParticipationRequest;
 import ru.practicum.main.service.request.repository.api.RequestRepository;
 import ru.practicum.main.service.user.model.User;
 import ru.practicum.main.service.user.repository.api.UserRepository;
-import ru.practicum.main.service.utils.EventSort;
-import ru.practicum.main.service.utils.EventState;
-import ru.practicum.main.service.utils.PageRequestUtil;
-import ru.practicum.main.service.utils.RequestState;
+import ru.practicum.main.service.utils.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -113,16 +110,12 @@ public class EventServiceImpl implements EventService {
         if (updateEventPrivateDto.getStateAction() == null) {
             newEvent.setState(oldEvent.getState());
         } else {
-            switch (updateEventPrivateDto.getStateAction()) {
-                case CANCEL_REVIEW: {
-                    newEvent.setState(EventState.CANCELED);
-                    break;
-                }
-                case SEND_TO_REVIEW: {
-                    newEvent.setState(EventState.PENDING);
-                    break;
-                }
+            if (StatePrivateAction.CANCEL_REVIEW.equals(updateEventPrivateDto.getStateAction())) {
+                newEvent.setState(EventState.CANCELED);
+            } else {
+                newEvent.setState(EventState.PENDING);
             }
+
         }
         Event updatedEvent = finalUpdateEvent(oldEvent, newEvent, updateEventPrivateDto.getRequestModeration(), updateEventPrivateDto.getTitle());
         log.info("eventService: update event with id={}, initiatorId={}, oldEvent={}, updatedEvent={}",
@@ -202,24 +195,19 @@ public class EventServiceImpl implements EventService {
         if (updateEventAdminDto.getStateAction() == null) {
             newEvent.setState(oldEvent.getState());
         } else {
-            switch (updateEventAdminDto.getStateAction()) {
-                case PUBLISH_EVENT: {
-                    if (oldEvent.getState() == (EventState.PUBLISHED)) {
-                        throw new NotChangeableException("Event must not be published");
-                    }
-                    if (oldEvent.getState() == (EventState.CANCELED)) {
-                        throw new NotChangeableException("Event must not be canceled");
-                    }
-                    newEvent.setState(EventState.PUBLISHED);
-                    break;
+            if (StateAdminAction.PUBLISH_EVENT.equals(updateEventAdminDto.getStateAction())) {
+                if (oldEvent.getState() == (EventState.PUBLISHED)) {
+                    throw new NotChangeableException("Event must not be published");
                 }
-                case REJECT_EVENT: {
-                    if (oldEvent.getState() == (EventState.PUBLISHED)) {
-                        throw new NotChangeableException("Event must not be published");
-                    }
-                    newEvent.setState(EventState.CANCELED);
-                    break;
+                if (oldEvent.getState() == (EventState.CANCELED)) {
+                    throw new NotChangeableException("Event must not be canceled");
                 }
+                newEvent.setState(EventState.PUBLISHED);
+            } else {
+                if (oldEvent.getState() == (EventState.PUBLISHED)) {
+                    throw new NotChangeableException("Event must not be published");
+                }
+                newEvent.setState(EventState.CANCELED);
             }
         }
         Event updatedEvent = finalUpdateEvent(oldEvent, newEvent, updateEventAdminDto.getRequestModeration(),
