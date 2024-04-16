@@ -24,13 +24,19 @@ import java.util.Map;
 
 @Component
 public class StatsClient {
-    private static final String SERVER_URL = System.getenv("STATS_SERVER_URL");
+    private static String SERVER_URL = System.getenv("STATS_SERVER_URL");
     private static final String POST_HIT_PREFIX = "/hit";
     private static final String GET_STATS_PREFIX = "/stats";
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final RestTemplate rest;
 
+    static {
+        SERVER_URL = System.getenv("STATS_SERVER_URL") == null ? "http://localhost:9090" :
+                System.getenv("STATS_SERVER_URL");
+    }
+
     public StatsClient() {
+
         rest = new RestTemplateBuilder()
                 .uriTemplateHandler(new DefaultUriBuilderFactory(SERVER_URL))
                 .requestFactory(HttpComponentsClientHttpRequestFactory::new)
